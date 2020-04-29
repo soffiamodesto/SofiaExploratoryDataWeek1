@@ -1,0 +1,7 @@
+originalPowerCons <- read.csv("household_power_consumption.txt", header = TRUE, sep=";", na.strings="?", nrows=2075259)
+originalPowerCons$Date <- as.Date(originalPowerCons$Date, format= "%d/%m/%Y")
+powerConsFiltered <- subset(originalPowerCons, Date >= "2007-02-01" & Date <= "2007-02-02")
+powerConsFiltered$DateTime <- as.POSIXct(paste(powerConsFiltered$Date, powerConsFiltered$Time))
+png("plot2.png", width=480, height=480)
+with(powerConsFiltered, plot(Global_active_power~DateTime, type="l", ylab="Global Active Power (kilowatts)", xlab=""))
+dev.off()
