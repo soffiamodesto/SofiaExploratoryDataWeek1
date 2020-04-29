@@ -1,0 +1,7 @@
+originalPowerCons <- read.csv("household_power_consumption.txt", header = TRUE, sep=";", na.strings="?", nrows=2075259)
+originalPowerCons$Date <- as.Date(originalPowerCons$Date, format= "%d/%m/%Y")
+originalPowerCons$Time <- strptime(originalPowerCons$Time, format = "%H:%M:%S")
+powerConsFiltered <- subset(originalPowerCons, Date >= "2007-02-01" & Date <= "2007-02-02")
+png("plot1.png", width=480, height=480)
+with(powerConsFiltered, hist(Global_active_power, breaks = 11, main="Global Active Power", xlab="Global Active Power (kilowatts)", ylab="Frequency", col="red"))
+dev.off()
